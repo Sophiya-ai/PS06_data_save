@@ -32,7 +32,7 @@ for row in data_1:
     for text in row:
         num = float(text)
         numbers.append(num)
-        
+
 print(numbers)
 
 #фильтрация
