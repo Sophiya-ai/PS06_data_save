@@ -2,7 +2,7 @@ import csv
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+#from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 
 options = Options()  # Можно настроить опции, если требуется
@@ -25,13 +25,13 @@ light_pars = []
 for light in all_light:
     prices = []
     try:
-        name = light.find_element(By.XPATH, '//span[@itemprop="name"]').text
+        name = light.find_element(By.CLASS_NAME, 'ProductName').text
         print(name)
-        prices = light.find_elements(By.XPATH, '//span[@data-testid="price"]')
-        price = prices[0].text.strip()
+        prices = light.find_elements(By.CLASS_NAME, 'ui-LD-ZU')
+        price = prices[0].text.strip(' руб.')
         print(price)
         try:
-            old_price = prices[1].text.strip()
+            old_price = prices[1].text.strip(' руб.')
             print(old_price)
         except:
             old_price = "скидка не применялась"
