@@ -1,5 +1,4 @@
 import csv
-#import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -27,7 +26,7 @@ for vacancy in vacancies:
         title = title_el.text
         company = vacancy.find_element(By.CSS_SELECTOR,'span[data-qa="vacancy-serp__vacancy-employer-text"]').text
         try:
-            salary = vacancy.find_element(By.CSS_SELECTOR, "div.compensation-labels--cR9OD8ZegWd3f7Mzxe6z span.magritte-text___pbpft_3-0-18").text
+            salary = vacancy.find_element(By.CSS_SELECTOR, "div.compensation-labels--cR9OD8ZegWd3f7Mzxe6z span.magritte-text___pbpft_3-0-18").text.replace(' ',' ')
         except:
             salary = "Зарплата не указана"
         link = vacancy.find_element(By.CSS_SELECTOR,'a.magritte-link___b4rEM_4-3-12').get_attribute('href')
