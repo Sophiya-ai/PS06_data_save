@@ -15,7 +15,7 @@ url = 'https://www.divan.ru/category/svet'
 driver.get(url)
 WebDriverWait(driver, 5)
 
-all_light = driver.find_elements(By.CLASS_NAME, 'LlPhw')
+all_light = driver.find_elements(By.CLASS_NAME, 'lsooF')
 WebDriverWait(driver, 15)
 
 print(len(all_light))
@@ -25,7 +25,11 @@ light_pars = []
 for light in all_light:
     prices = []
     try:
-        name = light.find_element(By.CLASS_NAME, 'ProductName').text
+        print(light)
+        element = driver.find_element(By.CSS_SELECTOR,
+                                      'a.ui-GPFV8.qUioe.ProductName.ActiveProduct span[itemprop="name"]')
+        name = element.text
+        #name = light.find_element(By.CLASS_NAME, 'ProductName').text
         print(name)
         prices = light.find_elements(By.CLASS_NAME, 'ui-LD-ZU')
         price = prices[0].text.strip(' руб.')
@@ -46,7 +50,7 @@ for light in all_light:
 
 driver.quit()
 
-with open('lights.csv', 'w', newline = '', encoding = 'utf-8') as file:
+with open('lights1.csv', 'w', newline = '', encoding = 'utf-8') as file:
     writer = csv.writer(file)
     writer.writerow(["Наименование", "Цена", "Цена без скидки","Ссылка на товар"])
     writer.writerows(light_pars)
